@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Comparison</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Website Comparison Grid</h2>
+    <div class="grid-container">
+        <div class="grid-item">
+            <div id="map"></div>
+        </div>
+        <div class="grid-item">
+            <iframe src="https://embed.waze.com/iframe?zoom=15&lat=52.376297&lon=4.913034&ct=livemap" allowfullscreen></iframe>
+        </div>
+        <div class="grid-item">
+            <div id="mapContainer"></div> <!-- Here Maps container -->
+        </div>
+        <div class="grid-item">
+            <iframe src="/proxy_tomtom"></iframe>
+        </div>
+    </div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: {lat: 52.376297, lng: 4.913034}
+            });
+    
+            var trafficLayer = new google.maps.TrafficLayer();
+            trafficLayer.setMap(map);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAArsu0v01m7CbcothrrtCZliY3g_7jX7k&callback=initMap" async defer></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <!-- Ensure scripts.js is loaded after all map libraries -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
